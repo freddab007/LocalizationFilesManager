@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LocalizationFilesManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc23e9fa1de89723570684f0851ac21319306881")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+351785a6d352771d947f8112a5de52c06686eaa9")]
 [assembly: System.Reflection.AssemblyProductAttribute("LocalizationFilesManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LocalizationFilesManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
