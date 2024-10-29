@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SVN\\Cours\\Prog4B\\Git\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj": {}
+    "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj": {}
   },
   "projects": {
-    "D:\\SVN\\Cours\\Prog4B\\Git\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj": {
+    "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SVN\\Cours\\Prog4B\\Git\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
+        "projectUniqueName": "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
         "projectName": "LocalizationFilesManager",
-        "projectPath": "D:\\SVN\\Cours\\Prog4B\\Git\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
+        "projectPath": "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
         "packagesPath": "C:\\Users\\Formateur\\.nuget\\packages\\",
-        "outputPath": "D:\\SVN\\Cours\\Prog4B\\Git\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\obj\\",
+        "outputPath": "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Formateur\\AppData\\Roaming\\NuGet\\NuGet.Config",
