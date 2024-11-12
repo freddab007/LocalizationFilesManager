@@ -48,7 +48,7 @@ namespace LocalizationFilesManager
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-        } 
+        }
         private void Button_Edit(object sender, RoutedEventArgs e)
         {
 
@@ -56,7 +56,7 @@ namespace LocalizationFilesManager
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
         private void ExportCSV(object sender, RoutedEventArgs e)
         {
@@ -68,7 +68,7 @@ namespace LocalizationFilesManager
         }
         private void ExportJSON(object sender, RoutedEventArgs e)
         {
-            
+
         }
         private void ImportJSON(object sender, RoutedEventArgs e)
         {
