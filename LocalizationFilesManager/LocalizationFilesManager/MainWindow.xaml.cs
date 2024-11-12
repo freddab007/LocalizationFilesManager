@@ -24,16 +24,6 @@ namespace LocalizationFilesManager
         DataTable Data = new DataTable();
         private void InitGrid(string[] _string)
         {
-            foreach (string column in _string)
-            {
-                DataGridTextColumn textColumn = new DataGridTextColumn();
-                textColumn.Header = column;
-                textColumn.Binding = new Binding(column);
-                dataGrid.Columns.Add(textColumn);
-            }
-        }
-        /*private void InitGrid(string[] _string)
-        {
 
             foreach (string column in _string)
             {
@@ -48,16 +38,16 @@ namespace LocalizationFilesManager
                 textColumn.Binding = new Binding(column);
 
                 ////l'ajout'
-               /dataGrid.Columns.Add(textColumn);
-               // Data.Columns.Add(column);
+              // dataGrid.Columns.Add(textColumn);
+               Data.Columns.Add(column);
             }
-            //dataGrid.ItemsSource = Data.DefaultView;
-        }*/
+            dataGrid.ItemsSource = Data.DefaultView;
+        }
 
         private void AddGrid()
         {
 
-            Data.Rows.Add("gfd", "", "", "", "r");
+            Data.Rows.Add("", "", "", "", "");
 
             dataGrid.ItemsSource = Data.DefaultView;
         }
@@ -92,10 +82,12 @@ namespace LocalizationFilesManager
             {
                 using (StreamWriter s = new StreamWriter(saveFileDialog.FileName))
                 {
-                    for (int i = 0; i < Columns.Length; i++)
-                    {
-                        s.WriteLine(Columns[i]);
-                    }
+                    /*  for (int i = 0; i < Columns.Length; i++)
+                      {
+                          s.WriteLine(Columns[i]);
+                      }*/
+
+                    s.WriteLine(Data);
                 }
             }
         }
