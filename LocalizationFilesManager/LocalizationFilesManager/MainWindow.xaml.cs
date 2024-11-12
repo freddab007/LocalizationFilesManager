@@ -22,14 +22,6 @@ namespace LocalizationFilesManager
     {
         public string[] Columns = { "Id", "en", "fr", "es", "comments" };
         DataTable Data = new DataTable();
-        public class FileTranslate
-        {
-            public string id = "";
-            public string en = "";
-            public string fr = "";
-            public string es = "";
-            public string comments = "";
-        }
         private void InitGrid(string[] _string)
         {
             foreach (string column in _string)
