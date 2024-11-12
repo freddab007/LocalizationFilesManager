@@ -35,4 +35,5 @@ private void Button_Edit(object sender, RoutedEventArgs e)
     //Export
     SaveFileDialog sfd = new SaveFileDialog();
     sfd.Filter = "XML|.xml";
+    if (sfd.ShowDialog
 }

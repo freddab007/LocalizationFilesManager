@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Microsoft.Win32;
+using System.Data;
+using System.Net.Mail;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace LocalizationFilesManager
 {
@@ -17,6 +21,8 @@ namespace LocalizationFilesManager
     public partial class MainWindow : Window
     {
         public string[] Columns = { "Id", "en", "fr", "es", "comments" };
+
+        DataSet ds = new DataSet();
 
         public MainWindow()
         {
@@ -62,7 +68,7 @@ namespace LocalizationFilesManager
         }
         private void ExportJSON(object sender, RoutedEventArgs e)
         {
-
+            
         }
         private void ImportJSON(object sender, RoutedEventArgs e)
         {
@@ -70,11 +76,40 @@ namespace LocalizationFilesManager
         }
         private void ExportXML(object sender, RoutedEventArgs e)
         {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "XML|.xml";
 
+            //Tester avec && si == pas fonctionnel
+            if (sfd.ShowDialog().HasValue == sfd.ShowDialog().Value)
+            {
+                try
+                {
+                    ds.Tables[0].WriteXml(sfd.FileName);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
         }
         private void ImportXML(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "XML|.xml";
 
+            //Tester avec && si == pas fonctionnel
+            if (ofd.ShowDialog().HasValue == ofd.ShowDialog().Value)
+            {
+                try
+                {
+                    XmlReader xmlFile = XmlReader.Create(ofd.FileName, new XmlReaderSettings());
+                    ds.ReadXml(xmlFile);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
         }
         private void ExportCSharp(object sender, RoutedEventArgs e)
         {
