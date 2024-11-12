@@ -8,19 +8,19 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Formateur\\.nuget\\packages\\": {}
+    "C:\\Users\\Etudiant1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
+      "projectUniqueName": "D:\\SVN\\Eleves\\llenevez\\Tools\\Localization\\LocalWork\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
       "projectName": "LocalizationFilesManager",
-      "projectPath": "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
-      "packagesPath": "C:\\Users\\Formateur\\.nuget\\packages\\",
-      "outputPath": "D:\\Tom\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\obj\\",
+      "projectPath": "D:\\SVN\\Eleves\\llenevez\\Tools\\Localization\\LocalWork\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager.csproj",
+      "packagesPath": "C:\\Users\\Etudiant1\\.nuget\\packages\\",
+      "outputPath": "D:\\SVN\\Eleves\\llenevez\\Tools\\Localization\\LocalWork\\LocalizationFilesManager\\LocalizationFilesManager\\LocalizationFilesManager\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Formateur\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Etudiant1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
