@@ -8,6 +8,18 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Menu VerticalAlignment="Top" Height="22">
+            <MenuItem Header="_File">
+                <MenuItem Header="Export CSV" Click="ExportCSV"/>
+                <MenuItem Header="Import CSV" Click="ImportCSV"/>
+                <MenuItem Header="Export JSON"  Click="ExportJSON"/>
+                <MenuItem Header="Import JSON"  Click="ImportJSON"/>
+                <MenuItem Header="Export XML"  Click="ExportXML"/>
+                <MenuItem Header="Import XML"  Click="ImportXML"/>
+                <MenuItem Header="Export C#"  Click="ExportCSharp"/>
+                <MenuItem Header="Export C++"  Click="ExportCPlusPlus"/>
+                <Separator />
+                <MenuItem Header="_Exit" />
+            </MenuItem>
             <Button Content="File" Click="Button_Click"/>
             <Button Content="Edit" Click="Button_Edit"/>
         </Menu>

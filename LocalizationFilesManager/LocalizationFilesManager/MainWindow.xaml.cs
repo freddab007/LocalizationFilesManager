@@ -50,7 +50,39 @@ namespace LocalizationFilesManager
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
+        }
+        private void ExportCSV(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ImportCSV(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ExportJSON(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ImportJSON(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ExportXML(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ImportXML(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ExportCSharp(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ExportCPlusPlus(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
