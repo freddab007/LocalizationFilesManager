@@ -50,7 +50,7 @@ namespace LocalizationFilesManager
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
         private void ExportCSV(object sender, RoutedEventArgs e)
         {
