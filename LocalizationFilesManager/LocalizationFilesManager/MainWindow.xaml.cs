@@ -12,9 +12,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace LocalizationFilesManager
 {
+    public class DataJson
+    {
+        public string Id { get; set; }
+        public string en { get; set; }
+        public string fr { get; set; }
+        public string es { get; set; }
+        public string comments { get; set; }
+    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -68,11 +78,43 @@ namespace LocalizationFilesManager
         }
         private void ExportJSON(object sender, RoutedEventArgs e)
         {
-            
+            var data = (List<DataJson>)this.dataGrid.ItemsSource;
+            string jsonString = JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                if (File.Exists(saveFileDialog.FileName))
+                {
+                    File.Delete(saveFileDialog.FileName);
+                }
+
+                File.WriteAllText(saveFileDialog.FileName, jsonString);
+            }
         }
         private void ImportJSON(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                if (!File.Exists(openFileDialog.FileName))
+                {
+                    Console.WriteLine(openFileDialog.FileName + "is not valide");
+                    return;
+                }
 
+                var json = File.ReadAllText(openFileDialog.FileName);
+                List<DataJson>? dataJson = JsonConvert.DeserializeObject<List<DataJson>>(json);
+
+                dataGrid.ItemsSource = null;
+
+
+                if (dataJson != null)
+                {
+                    dataGrid.ItemsSource = dataJson;
+                }
+            }
         }
         private void ExportXML(object sender, RoutedEventArgs e)
         {
