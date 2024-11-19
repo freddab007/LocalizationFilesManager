@@ -75,7 +75,7 @@ namespace LocalizationFilesManager
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
         private void ExportCSV(object sender, RoutedEventArgs e)
         {
@@ -124,7 +124,7 @@ namespace LocalizationFilesManager
         }
         private void ExportJSON(object sender, RoutedEventArgs e)
         {
-            
+
         }
         private void ImportJSON(object sender, RoutedEventArgs e)
         {
@@ -136,7 +136,7 @@ namespace LocalizationFilesManager
             sfd.Filter = "XML|.xml";
 
             //Tester avec && si == pas fonctionnel
-            if (sfd.ShowDialog().HasValue == sfd.ShowDialog().Value)
+            if (sfd.ShowDialog() == true)
             {
                 try
                 {
@@ -148,13 +148,14 @@ namespace LocalizationFilesManager
                 }
             }
         }
+
         private void ImportXML(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "XML|.xml";
 
             //Tester avec && si == pas fonctionnel
-            if (ofd.ShowDialog().HasValue == ofd.ShowDialog().Value)
+            if (ofd.ShowDialog() == true)
             {
                 try
                 {
