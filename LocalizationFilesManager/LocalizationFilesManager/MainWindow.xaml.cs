@@ -46,7 +46,7 @@ namespace LocalizationFilesManager
                // dataGrid.Columns.Add(textColumn);
                 Data.Columns.Add(column);
             }
-           // dataGrid.ItemsSource = Data.DefaultView;
+            dataGrid.ItemsSource = Data.DefaultView;
         }
 
         private void AddGrid()
@@ -70,7 +70,7 @@ namespace LocalizationFilesManager
             InitializeComponent();
 
 
-            foreach (string column in Columns)
+           /* foreach (string column in Columns)
             {
                 //Exemple pour ajouter une colonne à la grille
                 DataGridTextColumn textColumn = new DataGridTextColumn();
@@ -83,11 +83,11 @@ namespace LocalizationFilesManager
                 textColumn.Binding = new Binding(column);
 
                 ////l'ajout'
-                dataGrid.Columns.Add(textColumn);
-                //Data.Columns.Add(column);
-            }
-
-            //  InitGrid(Columns);
+                //dataGrid.Columns.Add(textColumn);
+                Data.Columns.Add(column);
+            }*/
+            //dataGrid.ItemsSource = Data.DefaultView;  
+            InitGrid(Columns);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -122,13 +122,14 @@ namespace LocalizationFilesManager
                         }
                     }
                     s.Write(s.NewLine);
-                    foreach (DataRow dr in Data.Rows)
+                    //foreach (DataRow dr in Data.Rows)
+                    for(int y = 0; y < Data.Rows.Count; y++)
                     {
                         for (int i = 0; i < Data.Columns.Count; i++)
                         {
-                            if (!Convert.IsDBNull(dr[i]))
+                            if (!Convert.IsDBNull(Data.Rows[y][i]))
                             {
-                                string value = dr[i].ToString();
+                                string value = Data.Rows[y][i].ToString();
                                 if (value.Contains(','))
                                 {
                                     value = String.Format("\"{0}\"", value);
@@ -136,7 +137,7 @@ namespace LocalizationFilesManager
                                 }
                                 else
                                 {
-                                    s.Write(dr[i].ToString());
+                                    s.Write(Data.Rows[y][i].ToString());
                                 }
                             }
                             if (i < Data.Columns.Count - 1)
