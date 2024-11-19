@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Mail;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace LocalizationFilesManager
@@ -27,33 +30,27 @@ namespace LocalizationFilesManager
 
         DataSet ds = new DataSet();
         DataTable Data = new DataTable();
-        private void InitGrid(string[] _string)
+        private void InitGrid()
         {
-
-            foreach (string column in _string)
-            {
-                //Exemple pour ajouter une colonne à la grille
-                DataGridTextColumn textColumn = new DataGridTextColumn();
-                ////L'entête de la colonne
-
-
-                textColumn.Header = column;
-
-                ////le nom programmatique de la colonne
-                textColumn.Binding = new Binding(column);
-
-                ////l'ajout'
-               // dataGrid.Columns.Add(textColumn);
-                Data.Columns.Add(column);
-            }
+            Data.Columns.Add("id");
+            Data.Columns.Add("en");
+            dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = Data.DefaultView;
         }
 
-        private void AddGrid()
+        int colIndex = 0;
+        private void AddGrid(string text)
         {
-          //  Data.Columns.Clear();
-            Data.Rows.Add("", "", "", "", "");
+            //  Data.Columns.Clear();
+            //if (Data.Columns.Count == 0)
+            //{
+            //Data.Rows.Clear();
+            //    InitGrid(Columns);
 
+            //}
+            Data.Columns.Add(text);
+            //Data.Rows.Add();
+            dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = Data.DefaultView;
         }
 
@@ -70,29 +67,29 @@ namespace LocalizationFilesManager
             InitializeComponent();
 
 
-           /* foreach (string column in Columns)
-            {
-                //Exemple pour ajouter une colonne à la grille
-                DataGridTextColumn textColumn = new DataGridTextColumn();
-                ////L'entête de la colonne
+            /* foreach (string column in Columns)
+             {
+                 //Exemple pour ajouter une colonne à la grille
+                 DataGridTextColumn textColumn = new DataGridTextColumn();
+                 ////L'entête de la colonne
 
 
-                textColumn.Header = column;
+                 textColumn.Header = column;
 
-                ////le nom programmatique de la colonne
-                textColumn.Binding = new Binding(column);
+                 ////le nom programmatique de la colonne
+                 textColumn.Binding = new Binding(column);
 
-                ////l'ajout'
-                //dataGrid.Columns.Add(textColumn);
-                Data.Columns.Add(column);
-            }*/
+                 ////l'ajout'
+                 //dataGrid.Columns.Add(textColumn);
+                 Data.Columns.Add(column);
+             }*/
             //dataGrid.ItemsSource = Data.DefaultView;  
-            InitGrid(Columns);
+            InitGrid();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddGrid();
+            //AddGrid();
         }
         private void Button_Edit(object sender, RoutedEventArgs e)
         {
@@ -103,6 +100,12 @@ namespace LocalizationFilesManager
         {
 
         }
+
+        private void AddRow(string[] text)
+        {
+            Data.Rows.Add(text);
+        }
+
         private void ExportCSV(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -113,18 +116,20 @@ namespace LocalizationFilesManager
             {
                 using (StreamWriter s = new StreamWriter(saveFileDialog.FileName))
                 {
+                    StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < Data.Columns.Count; i++)
                     {
-                        s.Write(Data.Columns[i]);
+                        sb.Append(Data.Columns[i]);
                         if (i < Data.Columns.Count - 1)
                         {
-                            s.Write(",");
+                            sb.Append(",");
                         }
                     }
-                    s.Write(s.NewLine);
+                    s.WriteLine(sb.ToString());
                     //foreach (DataRow dr in Data.Rows)
-                    for(int y = 0; y < Data.Rows.Count; y++)
+                    for (int y = 0; y < Data.Rows.Count; y++)
                     {
+                        sb.Clear();
                         for (int i = 0; i < Data.Columns.Count; i++)
                         {
                             if (!Convert.IsDBNull(Data.Rows[y][i]))
@@ -133,19 +138,19 @@ namespace LocalizationFilesManager
                                 if (value.Contains(','))
                                 {
                                     value = String.Format("\"{0}\"", value);
-                                    s.Write(value);
+                                    sb.Append(value);
                                 }
                                 else
                                 {
-                                    s.Write(Data.Rows[y][i].ToString());
+                                    sb.Append(Data.Rows[y][i].ToString());
                                 }
                             }
                             if (i < Data.Columns.Count - 1)
                             {
-                                s.Write(",");
+                                sb.Append(",");
                             }
                         }
-                        s.Write(s.NewLine);
+                        s.WriteLine(sb.ToString());
                     }
                     s.Close();
                 }
@@ -153,6 +158,8 @@ namespace LocalizationFilesManager
         }
         private void ImportCSV(object sender, RoutedEventArgs e)
         {
+            Data.Rows.Clear();
+            Data.Columns.Clear();
             dataGrid.Columns.Clear();
             List<string> columns = new List<string>();
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -161,20 +168,27 @@ namespace LocalizationFilesManager
             if (openFileDialog.ShowDialog() == true)
             {
                 string text = "";
+             
                 using (StreamReader s = new StreamReader(openFileDialog.FileName))
                 {
-                    while ((text = s.ReadLine()) != null)
+                    while (!s.EndOfStream)
                     {
-                        columns.Add(text);
+                        string[] currentLine = s.ReadLine().Split(',');
+                        if (Data.Columns.Count == currentLine.Length)
+                        {
+                            AddRow(currentLine);
+                        }
+                        for (int i = 0; i < currentLine.Length; i++)
+                        {
+                            if (Data.Columns.Count < currentLine.Length)
+                            {
+                                AddGrid(currentLine[i]);
+                            }
+                        }
+                        //Data.Rows.Add();
                     }
-
                     s.Close();
                 }
-                for (int i = 0; i < Columns.Length; i++)
-                {
-                    Columns[i] = columns[i];
-                }
-                InitGrid(Columns);
             }
         }
         private void ExportJSON(object sender, RoutedEventArgs e)
