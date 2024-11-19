@@ -80,7 +80,8 @@ namespace LocalizationFilesManager
             sfd.Filter = "XML|.xml";
 
             //Tester avec && si == pas fonctionnel
-            if (sfd.ShowDialog().HasValue == sfd.ShowDialog().Value)
+            //if (sfd.ShowDialog().HasValue == sfd.ShowDialog().Value)
+            if (sfd.ShowDialog().HasValue == DialogResult.)
             {
                 try
                 {
@@ -92,6 +93,7 @@ namespace LocalizationFilesManager
                 }
             }
         }
+
         private void ImportXML(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
