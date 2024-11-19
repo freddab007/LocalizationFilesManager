@@ -169,7 +169,7 @@ namespace LocalizationFilesManager
         }
         private void ExportCSharp(object sender, RoutedEventArgs e)
         {
-
+            ExportCS.ExportCSFunc(Data);
         }
         private void ExportCPlusPlus(object sender, RoutedEventArgs e)
         {
