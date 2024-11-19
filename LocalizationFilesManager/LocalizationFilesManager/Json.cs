@@ -8,6 +8,8 @@ using System.IO;
 using Microsoft.Win32;
 using System.Windows.Controls;
 using System.Windows;
+using System.Data;
+using System.Diagnostics;
 
 namespace LocalizationFilesManager
 {
@@ -26,7 +28,7 @@ namespace LocalizationFilesManager
         static public void ExportJSON(DataGrid dataGrid)
         {
             var data = (List<DataJson>)dataGrid.ItemsSource;
-            string jsonString = JsonConvert.SerializeObject(data,Formatting.Indented);
+            string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
@@ -55,6 +57,7 @@ namespace LocalizationFilesManager
                 var json = File.ReadAllText(openFileDialog.FileName);
                 List<DataJson>? dataJson = JsonConvert.DeserializeObject<List<DataJson>>(json);
 
+               
                 dataGrid.ItemsSource = null;
 
 
