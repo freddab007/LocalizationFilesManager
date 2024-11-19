@@ -1,5 +1,4 @@
-﻿//suppr ^
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System.Data;
 using System.Data.Common;
 using System.IO;
@@ -25,6 +24,8 @@ namespace LocalizationFilesManager
     {
         public string[] Columns = { "Id", "en", "fr", "es", "comments" };
 
+        DataSet ds = new DataSet();
+        DataTable Data = new DataTable();
         private void InitGrid(string[] _string)
         {
 
@@ -44,6 +45,7 @@ namespace LocalizationFilesManager
               // dataGrid.Columns.Add(textColumn);
                Data.Columns.Add(column);
             }
+           // dataGrid.ItemsSource = Data.DefaultView;
             dataGrid.ItemsSource = Data.DefaultView;
         }
 

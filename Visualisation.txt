@@ -1,0 +1,39 @@
+Il faut que je fasse un outil qui exporte les fichiers en XML.
+
+Quel est mon travail ? :
+1) Pouvoir importer des fichiers XML
+2) Pouvoir afficher le fichier afin de l'éditer sous forme de fichier Excel (Datagrid-WPF)
+3) Pouvoir exporter le XML et pouvoir exporter en classe
+
+Etapes :
+1) Créer un autre menu Importer ou Exporter lorsque l'on clique sur File
+
+Visualisation :
+Comment créer un menu ?
+-------------------------
+private void Button_Click(object sender, RoutedEventArgs e)
+{
+    //Import
+    OpenFileDialog ofd = new OpenFileDialog();
+    ofd.Filter = "XML|.xml";
+
+    if (ofd.ShowDialog() == DialogResult.OK)
+    {
+        try
+        {
+            XmlReader xmlFile = XmlReader.Create(ofd.FileName, new XmlReaderSettings());
+            ds.ReadXml(xmlFile);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+} 
+private void Button_Edit(object sender, RoutedEventArgs e)
+{
+    //Export
+    SaveFileDialog sfd = new SaveFileDialog();
+    sfd.Filter = "XML|.xml";
+    if (sfd.ShowDialog
+}
