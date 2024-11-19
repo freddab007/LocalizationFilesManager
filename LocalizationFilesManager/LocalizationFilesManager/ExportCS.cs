@@ -21,12 +21,10 @@ namespace LocalizationFilesManager
 
             if (fileWriter.ShowDialog() == true)
             {
-                using (StreamWriter writer = new StreamWriter(fileWriter.FileName))
+                if ((myStream = fileWriter.OpenFile()) != null)
                 {
-
-                    writer.WriteLine("int test = 0;");
-
-                    writer.Close();
+                    // Code to write the stream goes here.
+                    myStream.Close();
                 }
             }
         }
