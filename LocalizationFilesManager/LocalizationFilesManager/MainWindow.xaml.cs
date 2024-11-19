@@ -81,7 +81,7 @@ namespace LocalizationFilesManager
 
             //Tester avec && si == pas fonctionnel
             //if (sfd.ShowDialog().HasValue == sfd.ShowDialog().Value)
-            if (sfd.ShowDialog().HasValue == DialogResult.)
+            if (sfd.ShowDialog() == true)
             {
                 try
                 {
@@ -100,7 +100,7 @@ namespace LocalizationFilesManager
             ofd.Filter = "XML|.xml";
 
             //Tester avec && si == pas fonctionnel
-            if (ofd.ShowDialog().HasValue == ofd.ShowDialog().Value)
+            if (ofd.ShowDialog() == true)
             {
                 try
                 {
