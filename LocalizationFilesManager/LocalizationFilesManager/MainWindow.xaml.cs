@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 
+
 namespace LocalizationFilesManager
 {
     /// <summary>
