@@ -442,3 +442,6 @@
 /test.json
 /LocalizationFilesManager/LocalizationFilesManager/bin/Debug/net8.0-windows/LocalizationFilesManager.deps.json
 /LocalizationFilesManager/LocalizationFilesManager/MainWindow.xaml.cs
+/csvV1.csv
+/ExportXML.xml
+/testV3.json
