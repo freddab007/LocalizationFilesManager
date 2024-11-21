@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using CSVSTATE;
+using GridState;
 
 
 namespace LocalizationFilesManager
@@ -46,7 +47,7 @@ namespace LocalizationFilesManager
                // dataGrid.Columns.Add(textColumn);
                 Data.Columns.Add(column);
             }
-
+            dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = Data.DefaultView;
         }
 
@@ -101,12 +102,10 @@ namespace LocalizationFilesManager
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow inputDialog = new MainWindow();
-            if (inputDialog.ShowDialog() == true)
+            if (InputText.LineCount > 0)
             {
-                //tex
+                GridClass.AddGrid(Data, dataGrid, InputText.Text);
             }
-            // AddGrid();
         }
         private void Button_Edit(object sender, RoutedEventArgs e)
         {
@@ -241,12 +240,17 @@ namespace LocalizationFilesManager
         }
         private void ExportCPlusPlus(object sender, RoutedEventArgs e)
         {
-
+  
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            
         }
     }
 }
