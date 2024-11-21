@@ -36,8 +36,7 @@ namespace LocalizationFilesManager
                 //Exemple pour ajouter une colonne à la grille
                 DataGridTextColumn textColumn = new DataGridTextColumn();
                 ////L'entête de la colonne
-                //
-
+                
                 textColumn.Header = column;
 
                 ////le nom programmatique de la colonne
