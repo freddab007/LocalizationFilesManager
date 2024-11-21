@@ -28,5 +28,6 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="InputText" HorizontalAlignment="Left" Margin="572,352,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
     </Grid>
 </Window>

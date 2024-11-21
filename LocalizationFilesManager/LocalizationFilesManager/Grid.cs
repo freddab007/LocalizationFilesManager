@@ -12,10 +12,28 @@ namespace GridState
     {
         static public void AddGrid(DataTable _data, DataGrid _grid, string _text)
         {
-            _data.Columns.Add(_text);
+            List<string> strings = new List<string>();
 
-            _grid.ItemsSource = null;
-            _grid.ItemsSource = _data.DefaultView;
+            for (int i = 0; i < _data.Columns.Count; i++)
+            {
+                strings.Add(_data.Columns[i].ColumnName);
+            }
+            bool index = false;
+            for (int i = 0; i < strings.Count; i++)
+            {
+                if (strings[i].ToString() == _text)
+                {
+                    index = true;
+                }
+            }
+
+            if (index == false)
+            {
+                _data.Columns.Add(_text);
+
+                _grid.ItemsSource = null;
+                _grid.ItemsSource = _data.DefaultView;
+            }
         }
        static public void AddRow(DataTable _data, DataGrid _grid, string[] _text)
         {
