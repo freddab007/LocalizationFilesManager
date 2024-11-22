@@ -139,7 +139,8 @@ namespace LocalizationFilesManager
 
         private void ImportXML(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            XML.ImportXML(Data, dataGrid);
+            /*OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "XML|*.xml";
 
             List<string> IdList = new List<string>();
@@ -152,7 +153,7 @@ namespace LocalizationFilesManager
             {
                 if (File.Exists(ofd.FileName))
                 {
-                    //dataGrid.Columns.Clear();
+                    dataGrid.Columns.Clear();
                     using (XmlReader inputFile = XmlReader.Create(ofd.FileName))
                     {
                         try
@@ -211,7 +212,7 @@ namespace LocalizationFilesManager
                         }
                     }
                 }
-            }
+            }*/
         }
         private void ExportCSharp(object sender, RoutedEventArgs e)
         {
