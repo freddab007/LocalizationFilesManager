@@ -44,7 +44,16 @@ namespace GridState
             _grid.ItemsSource = _data.DefaultView;
         }
 
-       static public void SupLine(DataTable _data)
+        static public void AddRow(DataTable _data, DataGrid _grid, string _text)
+        {
+            //  Data.Columns.Clear();
+            _data.Rows.Add(_text);
+
+            _grid.ItemsSource = null;
+            _grid.ItemsSource = _data.DefaultView;
+        }
+
+        static public void SupLine(DataTable _data)
         {
             if (_data.Rows.Count > 0)
             {
