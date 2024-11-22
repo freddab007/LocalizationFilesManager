@@ -37,14 +37,14 @@ namespace LocalizationFilesManager
                 //Exemple pour ajouter une colonne à la grille
                 DataGridTextColumn textColumn = new DataGridTextColumn();
                 ////L'entête de la colonne
-                
+
                 textColumn.Header = column;
 
                 ////le nom programmatique de la colonne
                 textColumn.Binding = new Binding(column);
 
                 ////l'ajout'
-               // dataGrid.Columns.Add(textColumn);
+                // dataGrid.Columns.Add(textColumn);
                 Data.Columns.Add(column);
             }
             dataGrid.ItemsSource = null;
@@ -80,22 +80,22 @@ namespace LocalizationFilesManager
             InitializeComponent();
 
 
-           /* foreach (string column in Columns)
-            {
-                //Exemple pour ajouter une colonne à la grille
-                DataGridTextColumn textColumn = new DataGridTextColumn();
-                ////L'entête de la colonne
+            /* foreach (string column in Columns)
+             {
+                 //Exemple pour ajouter une colonne à la grille
+                 DataGridTextColumn textColumn = new DataGridTextColumn();
+                 ////L'entête de la colonne
 
 
-                textColumn.Header = column;
+                 textColumn.Header = column;
 
-                ////le nom programmatique de la colonne
-                textColumn.Binding = new Binding(column);
+                 ////le nom programmatique de la colonne
+                 textColumn.Binding = new Binding(column);
 
-                ////l'ajout'
-                //dataGrid.Columns.Add(textColumn);
-                Data.Columns.Add(column);
-            }*/
+                 ////l'ajout'
+                 //dataGrid.Columns.Add(textColumn);
+                 Data.Columns.Add(column);
+             }*/
             //dataGrid.ItemsSource = Data.DefaultView;  
             InitGrid(Columns);
         }
@@ -134,28 +134,7 @@ namespace LocalizationFilesManager
         }
         private void ExportXML(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "XML|*.xml";
-
-            if (sfd.ShowDialog() == true)
-            {
-                using (XmlWriter outputFile = XmlWriter.Create(sfd.FileName))
-                {
-                    outputFile.WriteStartDocument();
-
-                    outputFile.WriteStartElement("Languages");
-
-                    foreach (System.Data.DataRowView drv in dataGrid.ItemsSource)
-                    {
-                        for (int i = 0; i < Columns.Length; i++)
-                        {
-                            outputFile.WriteElementString(Columns[i].ToString(), drv[i].ToString());
-                        }
-                    }
-
-                    outputFile.WriteEndElement(); //all paths
-                }
-            }
+            XML.ExportXML(Data);
         }
 
         private void ImportXML(object sender, RoutedEventArgs e)
@@ -240,7 +219,7 @@ namespace LocalizationFilesManager
         }
         private void ExportCPlusPlus(object sender, RoutedEventArgs e)
         {
-  
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -250,7 +229,7 @@ namespace LocalizationFilesManager
 
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            
+
         }
     }
 }
