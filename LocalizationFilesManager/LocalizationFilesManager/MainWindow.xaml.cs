@@ -126,11 +126,11 @@ namespace LocalizationFilesManager
         }
         private void ExportJSON(object sender, RoutedEventArgs e)
         {
-            Json.ExportJSON(dataGrid);
+            Json.ExportJSON(Data);
         }
         private void ImportJSON(object sender, RoutedEventArgs e)
         {
-            Json.ImportJSON(dataGrid);
+            Json.ImportJSON(dataGrid, Data);
         }
         private void ExportXML(object sender, RoutedEventArgs e)
         {
