@@ -23,11 +23,11 @@
             <Button Content="File" Click="Button_Click"/>
             <Button Content="Edit" Click="Button_Edit"/>
         </Menu>
-        <DataGrid Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,22,0,0" VerticalAlignment="Top" SelectionChanged="dataGrid_SelectionChanged" Grid.RowSpan="5">
+        <DataGrid Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,22,0,0" VerticalAlignment="Top" Grid.RowSpan="5">
             <DataGrid.Columns>
 
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="InputText" HorizontalAlignment="Left" Margin="572,352,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox x:Name="InputText" HorizontalAlignment="Left" Margin="572,352,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
     </Grid>
 </Window>

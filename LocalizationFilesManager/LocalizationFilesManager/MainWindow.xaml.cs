@@ -51,52 +51,9 @@ namespace LocalizationFilesManager
             dataGrid.ItemsSource = Data.DefaultView;
         }
 
-        /*private void AddGrid(string _text)
-        {
-            Data.Columns.Add(_text);
-
-            dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = Data.DefaultView;
-        }
-        private void AddRow(string[] _text)
-        {
-            //  Data.Columns.Clear();
-            Data.Rows.Add(_text);
-
-            dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = Data.DefaultView;
-        }
-
-        private void SupLine()
-        {
-            if (Data.Rows.Count > 0)
-            {
-                Data.Rows.RemoveAt(0);
-            }
-        }*/
-
         public MainWindow()
         {
             InitializeComponent();
-
-
-            /* foreach (string column in Columns)
-             {
-                 //Exemple pour ajouter une colonne à la grille
-                 DataGridTextColumn textColumn = new DataGridTextColumn();
-                 ////L'entête de la colonne
-
-
-                 textColumn.Header = column;
-
-                 ////le nom programmatique de la colonne
-                 textColumn.Binding = new Binding(column);
-
-                 ////l'ajout'
-                 //dataGrid.Columns.Add(textColumn);
-                 Data.Columns.Add(column);
-             }*/
-            //dataGrid.ItemsSource = Data.DefaultView;  
             InitGrid(Columns);
         }
 
@@ -110,11 +67,6 @@ namespace LocalizationFilesManager
         private void Button_Edit(object sender, RoutedEventArgs e)
         {
             GridState.GridClass.SupLine(Data);
-        }
-
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
         private void ExportCSV(object sender, RoutedEventArgs e)
         {
@@ -140,79 +92,6 @@ namespace LocalizationFilesManager
         private void ImportXML(object sender, RoutedEventArgs e)
         {
             XML.ImportXML(Data, dataGrid);
-            /*OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "XML|*.xml";
-
-            List<string> IdList = new List<string>();
-            List<string> enList = new List<string>();
-            List<string> frList = new List<string>();
-            List<string> esList = new List<string>();
-            List<string> commentsList = new List<string>();
-
-            if (ofd.ShowDialog() == true)
-            {
-                if (File.Exists(ofd.FileName))
-                {
-                    dataGrid.Columns.Clear();
-                    using (XmlReader inputFile = XmlReader.Create(ofd.FileName))
-                    {
-                        try
-                        {
-                            while (inputFile.Read())
-                            {
-                                if (inputFile.IsStartElement())
-                                {
-                                    switch (inputFile.Name.ToString())
-                                    {
-                                        case "Id":
-                                            IdList.Add(inputFile.ReadString());
-                                            break;
-                                        case "en":
-                                            enList.Add(inputFile.ReadString());
-                                            break;
-                                        case "fr":
-                                            frList.Add(inputFile.ReadString());
-                                            break;
-                                        case "es":
-                                            esList.Add(inputFile.ReadString());
-                                            break;
-                                        case "comments":
-                                            commentsList.Add(inputFile.ReadString());
-                                            break;
-                                    }
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                    }
-                    foreach (System.Data.DataRowView drv in dataGrid.ItemsSource)
-                    {
-                        foreach (string s in IdList)
-                        {
-                            drv[0] = s;
-                        }
-                        foreach (string s in enList)
-                        {
-                            drv[1] = s;
-                        }
-                        foreach (string s in frList)
-                        {
-                            drv[2] = s;
-                        }
-                        foreach (string s in esList)
-                        {
-                            drv[3] = s;
-                        }
-                        foreach (string s in commentsList)
-                        {
-                            drv[4] = s;
-                        }
-                    }
-                }
-            }*/
         }
         private void ExportCSharp(object sender, RoutedEventArgs e)
         {
@@ -220,17 +99,7 @@ namespace LocalizationFilesManager
         }
         private void ExportCPlusPlus(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-
+            ExportCPP.ExportCPPFunc(Data);
         }
     }
 }
