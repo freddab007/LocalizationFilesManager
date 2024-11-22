@@ -11,11 +11,11 @@ namespace LocalizationFilesManager
 {
     internal class ExportCPP
     {
-        static public void ExportCSFunc(DataTable _data)
+        static public void ExportCPPFunc(DataTable _data)
         {
             SaveFileDialog fileWriter = new SaveFileDialog();
 
-            fileWriter.Filter = "CS|*.cs";
+            fileWriter.Filter = "HPP|*.hpp";
 
             if (fileWriter.ShowDialog() == true)
             {
@@ -32,8 +32,10 @@ namespace LocalizationFilesManager
                     writer.WriteLine("using namespace std;");
                     writer.WriteLine("enum Language");
                     writer.WriteLine("{");
-                    writer.WriteLine("    EN,");
-                    writer.WriteLine("    FR,");
+                    for (int i = 1; i < _data.Columns.Count - 1; i++)
+                    {
+                        writer.WriteLine("    " + _data.Columns[i].ColumnName.ToUpper() + ",");
+                    }
                     writer.WriteLine("};");
 
                     writer.WriteLine("class Localization");
@@ -45,17 +47,24 @@ namespace LocalizationFilesManager
                     writer.WriteLine("    static void Init();");
                     writer.WriteLine("};");
 
-                    writer.WriteLine("#endif");
-
                     writer.WriteLine("map < std::string, map< Language, string>> Localization::mapWord;");
 
 
                     writer.WriteLine("void Localization::Init()");
                     writer.WriteLine("{");
 
-                    writer.WriteLine("    mapWord[\"en\"] = map<Language, string>();");
-                    writer.WriteLine("    mapWord[\"en\"][EN] = \"test\";");
+                    for (int i = 0; i < _data.Rows.Count; i++)
+                    {
+                        writer.WriteLine("        mapWord[\"" + _data.Rows[i].ItemArray[0].ToString() + "\"] = map<Language, string>();");
+                        for (int j = 1; j < _data.Columns.Count - 1; j++)
+                        {
+                            writer.WriteLine("        mapWord[\"" + _data.Rows[i].ItemArray[0].ToString() + "\"][" + _data.Columns[j].ColumnName.ToUpper() + "] = \"" + _data.Rows[i].ItemArray[j] + "\";");
+                        }
+                        writer.WriteLine("");
+                    }
                     writer.WriteLine("}");
+
+                    writer.WriteLine("#endif");
                 }
             }
         }
