@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Data;
 using System.Diagnostics;
+using GridState;
 
 namespace LocalizationFilesManager
 {
@@ -45,19 +46,37 @@ namespace LocalizationFilesManager
 
         static public void ImportJSON(DataGrid dataGrid, DataTable _data)
         {
+            _data.Clear();
+            dataGrid.Columns.Clear();
             OpenFileDialog openFileDialog = new OpenFileDialog();
+
+
             if (openFileDialog.ShowDialog() == true)
             {
-                if (!File.Exists(openFileDialog.FileName))
-                {
-                    Console.WriteLine(openFileDialog.FileName + "is not valide");
-                    return;
-                }
 
                 var json = File.ReadAllText(openFileDialog.FileName);
-               _data = JsonConvert.DeserializeObject<DataTable>(json);
+                
 
-               
+
+                for (int i = 0; i < _data.Columns.Count; i++)
+                {
+                    GridClass.AddGrid(_data, dataGrid, _data.Columns[i].ColumnName);
+                }
+
+                for (int t = 0; t < _data.Rows.Count; t++) 
+                {
+                    List<string> files = new List<string>();
+
+                    for (int i = 1; i < _data.Columns.Count; i++)
+                    {
+                        files.Add(_data.Rows[t][i].ToString());
+                    }
+                    GridClass.AddRow(_data, dataGrid, files.ToArray());
+                }
+
+                _data = JsonConvert.DeserializeObject<DataTable>(json);
+
+
                 dataGrid.ItemsSource = null;
 
 
