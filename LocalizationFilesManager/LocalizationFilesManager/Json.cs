@@ -25,9 +25,9 @@ namespace LocalizationFilesManager
 
     internal class Json
     {
-        static public void ExportJSON(DataGrid dataGrid)
+        static public void ExportJSON(DataTable _data)
         {
-            var data = (List<DataJson>)dataGrid.ItemsSource;
+            var data = _data;
             string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -43,7 +43,7 @@ namespace LocalizationFilesManager
             }
         }
 
-        static public void ImportJSON(DataGrid dataGrid)
+        static public void ImportJSON(DataGrid dataGrid, DataTable _data)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
@@ -55,15 +55,15 @@ namespace LocalizationFilesManager
                 }
 
                 var json = File.ReadAllText(openFileDialog.FileName);
-                List<DataJson>? dataJson = JsonConvert.DeserializeObject<List<DataJson>>(json);
+               _data = JsonConvert.DeserializeObject<DataTable>(json);
 
                
                 dataGrid.ItemsSource = null;
 
 
-                if (dataJson != null)
+                if (_data != null)
                 {
-                    dataGrid.ItemsSource = dataJson;
+                    dataGrid.ItemsSource = _data.DefaultView;
                 }
             }
         }
