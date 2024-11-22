@@ -9,6 +9,8 @@ using System.Windows;
 using System.Xml;
 using System.IO;
 using System.Data;
+using GridState;
+using System.Windows.Shapes;
 
 namespace LocalizationFilesManager
 {
@@ -42,81 +44,85 @@ namespace LocalizationFilesManager
             }
         }
 
-        //static public void ImportXML(object sender, RoutedEventArgs e)
-        //{
-        //    OpenFileDialog ofd = new OpenFileDialog();
-        //    ofd.Filter = "XML|*.xml";
+        static public void ImportXML(DataTable _data, DataGrid _grid)
+        {
+            _data.Rows.Clear();
+            _data.Columns.Clear();
+            _grid.Columns.Clear();
 
-        //    List<string> IdList = new List<string>();
-        //    List<string> enList = new List<string>();
-        //    List<string> frList = new List<string>();
-        //    List<string> esList = new List<string>();
-        //    List<string> commentsList = new List<string>();
+            List<string> listValueRead = new List<string>();
 
-        //    if (ofd.ShowDialog() == true)
-        //    {
-        //        if (File.Exists(ofd.FileName))
-        //        {
-        //            //dataGrid.Columns.Clear();
-        //            using (XmlReader inputFile = XmlReader.Create(ofd.FileName))
-        //            {
-        //                try
-        //                {
-        //                    while (inputFile.Read())
-        //                    {
-        //                        if (inputFile.IsStartElement())
-        //                        {
-        //                            switch (inputFile.Name.ToString())
-        //                            {
-        //                                case "Id":
-        //                                    IdList.Add(inputFile.ReadString());
-        //                                    break;
-        //                                case "en":
-        //                                    enList.Add(inputFile.ReadString());
-        //                                    break;
-        //                                case "fr":
-        //                                    frList.Add(inputFile.ReadString());
-        //                                    break;
-        //                                case "es":
-        //                                    esList.Add(inputFile.ReadString());
-        //                                    break;
-        //                                case "comments":
-        //                                    commentsList.Add(inputFile.ReadString());
-        //                                    break;
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    MessageBox.Show(ex.Message);
-        //                }
-        //            }
-        //            foreach (System.Data.DataRowView drv in dataGrid.ItemsSource)
-        //            {
-        //                foreach (string s in IdList)
-        //                {
-        //                    drv[0] = s;
-        //                }
-        //                foreach (string s in enList)
-        //                {
-        //                    drv[1] = s;
-        //                }
-        //                foreach (string s in frList)
-        //                {
-        //                    drv[2] = s;
-        //                }
-        //                foreach (string s in esList)
-        //                {
-        //                    drv[3] = s;
-        //                }
-        //                foreach (string s in commentsList)
-        //                {
-        //                    drv[4] = s;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "XML|*.xml";
+
+            if (ofd.ShowDialog() == true)
+            {
+                if (File.Exists(ofd.FileName))
+                {
+                    List<string> column = new List<string>();
+                    using (XmlReader inputFile = XmlReader.Create(ofd.FileName))
+                    {
+                        bool newWord = false;
+                        int tempi = 0;
+                        int temp = -1;
+                        while (inputFile.Read())
+                        {
+
+
+
+
+                            if (inputFile.Depth == 1)
+                            {
+                                newWord = true;
+
+                            }
+                            else if (inputFile.Depth == 2)
+                            {
+                                string languagetext = inputFile.Name;
+                                string valuetext = inputFile.ReadString();
+                                /* if (!column.Contains(languagetext))
+                                 {
+
+                                         column.Add(languagetext);
+
+                                 }*/
+
+                                GridClass.AddGrid(_data, _grid, languagetext);
+
+                                listValueRead.Add(valuetext);
+
+                                if (newWord)
+                                {
+                                    GridClass.AddRow(_data, _grid, valuetext);
+                                    
+                                    temp++;
+                                    newWord = false;
+
+                                }
+                            }
+
+                        }
+                        /*for (int i = 0; i < column.Count; i++)
+                        {
+                            GridClass.AddGrid(_data, _grid, column[i]);
+                        }*/
+
+
+                    }
+                }
+            }
+            int index = 0;
+            for (int i = 0; i < _data.Rows.Count; i++)
+            {
+                for (int y = 0; y < _data.Columns.Count; y++)
+                {
+                    _data.Rows[i][y] = listValueRead[index];
+                    index++;
+                }
+            }
+
+            _grid.ItemsSource = null;
+            _grid.ItemsSource = _data.DefaultView;
+        }
     }
 }
